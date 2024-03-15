@@ -1,0 +1,22 @@
+int n;
+   // cin >> n;
+   // int i=1;
+   // int val=0;
+   // while(i<=n)
+   // {
+   //  int j=1;
+   //  while(j<=n)
+   //  {
+   //      //char ch='A'+j-1+ val;
+   //     // cout << ch;
+   //      //or
+   //      char ch='A'+i+j-2;
+   //      cout<<ch;
+        
+   //      j++;
+
+   //  }
+   //  cout<<endl;
+   //  i++;
+   //  val++;
+   // }
