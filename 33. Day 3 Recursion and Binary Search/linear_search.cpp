@@ -38,7 +38,7 @@ int main(){
 
 int arr[5]={3,5,1,2,6};
 int size=5;
-int key =12;
+int key =6;
 
 bool ans = linear_search(arr,size,key);
 

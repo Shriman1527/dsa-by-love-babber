@@ -1,4 +1,5 @@
 #include<iostream>
+#include<map>
 using namespace std;
 
 class Node{
@@ -161,7 +162,7 @@ void deleteNodeVal(Node* &head , Node * & tail, int val)
     
 }
 
-void print(Node * &head)
+void print(Node * head)
 {
   Node*temp= head;
 
@@ -205,6 +206,100 @@ bool check_circular(Node * head)
 
 }
 
+bool detectLoop(Node* head){
+    if(head==NULL){
+        return false;
+
+    }
+
+    map<Node* ,bool> visited;
+    Node * temp =head;
+    while(temp !=NULL)
+    {
+        if(visited[temp]==true)
+        return true;
+
+        visited[temp]=true;
+        temp=temp->next;
+    }
+    return false;
+
+
+}
+
+//function to detect loop present or not 
+
+Node* floydDetectionLoop(Node * head){
+
+    if(head==NULL)
+    return NULL;
+
+    Node * slow= head;
+    Node * fast= head;
+
+    while(slow!=NULL && fast!=NULL)
+    {
+       
+        fast=fast->next;
+        if(fast!=NULL)
+        {
+            fast=fast->next;
+
+        }
+        slow=slow->next;
+        if(slow==fast){
+            cout<<"Loop is Present at slow -> data"<<slow->data<<endl;
+            return slow;
+
+        }
+
+    }
+    return NULL;
+
+}
+
+
+// function to get stering node in the loop
+Node * getStartingNode(Node * head){
+    if(head==NULL)
+    {
+        return NULL;
+    }
+
+    Node* intersection = floydDetectionLoop(head);
+    Node* fast= intersection;
+
+    Node* slow = head;
+    while(slow !=intersection)
+    {
+       
+        slow=slow->next;
+        intersection=intersection->next;
+
+
+    }
+
+    return slow;
+
+}
+
+void removeLoop(Node * head){
+
+    if(head==NULL)
+    return ;
+
+    Node * startOfLoop= getStartingNode(head);
+    Node * temp = startOfLoop;
+
+    while(temp->next!=startOfLoop)
+    {
+        temp=temp->next;
+
+    }
+    temp->next=NULL;
+
+}
+
 
 int main(){
 
@@ -235,6 +330,8 @@ print(head);
 
 insertatTail(tail,12);
 print(head);
+insertatTail(tail,17);
+insertatTail(tail,19);
 
 insertatPosition(head ,tail , 4, 15);
 print(head);
@@ -256,6 +353,34 @@ print(head);
 bool ans = check_circular(head);
 cout<<"answer"<< ans <<endl;
 
+
+print(head);
+
+//The following statement makes Loop in LL
+tail->next=head->next;
+
+
+//Check for loop is present or not 
+// bool answer= detectLoop(head);
+// cout<<"The given linked list has loop or not : "<< answer <<endl;
+
+//Another Method to detect loop in the LL
+Node* answer2 = floydDetectionLoop(head);
+cout<<"The given linked list has loop or not : "<< answer2->data <<endl;
+
+cout<<"Starting node of the loop is : "<<getStartingNode(head)->data<<endl;
+
+
+//Out task is remove the loop in LL
+removeLoop(head);
+// print(head);
+cout<<"Loop is present or not :"<<floydDetectionLoop(head)<<endl;
+//This is how we remove loop in the LL
+print(head);
+
+
+
 return 0;
+
 }
 

@@ -144,7 +144,35 @@ void print(Node * &tail){
 
 }
 
+bool check_circular(Node * tail )
+{
+    cout<<"call"<<endl;
 
+    if(tail==NULL)
+    return 1;
+
+
+    if(tail->next==NULL)
+    return 0;
+// to start from second node 
+Node * temp=tail->next;
+
+    
+    while(temp!=NULL && temp!=tail)
+    {
+        temp=temp->next;
+
+    }
+    if(temp==tail)
+    {
+ return 1;
+    }
+   
+    
+    return 0;
+
+
+}
 
 
 int main(){
@@ -158,7 +186,7 @@ print (tail);
 
 insertNode(tail,3,5);
 print (tail);
-/*
+
 insertNode(tail,5,7);
 print (tail);
 
@@ -174,15 +202,17 @@ print (tail);
 insertNode(tail,3,4);
 print (tail);
 
-deleteNode(tail,3);
-print (tail);
+// deleteNode(tail,3);
+// print (tail);
 
-deleteNode(tail,10);
-print (tail);
-*/
-deleteNode(tail,3);
-print (tail);
+// deleteNode(tail,10);
+// print (tail);
 
+// deleteNode(tail,3);
+// print (tail);
+
+bool ans = check_circular(tail);
+cout<<"answer"<< ans <<endl;
 
 
 
